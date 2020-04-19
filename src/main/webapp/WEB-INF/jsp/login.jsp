@@ -11,7 +11,16 @@
 </head>
 
 <body>
-    <p> Mi first JSP PAGE Utilizando Expresison language se recupera el valor <text>${valor}</text> name: ${name}</p>
+    Bienvenido<br />
+    Ingrese sus credenciales <br/>
+	${errorMessage}
+    <form action="" method="post">
+        <label for="Pname">Nombre:</label>
+        <input id="Pname" type="text" name="name">
+        <label for="Ppass">Pass:</label>
+        <input id="Ppass" type="text" name="password">
+        <input type="submit" value="Save">
+    </form>
 </body>
 
 </html>
