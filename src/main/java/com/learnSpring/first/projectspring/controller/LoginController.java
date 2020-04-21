@@ -28,7 +28,8 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String submitCredencials(@RequestParam String name, @RequestParam String password, ModelMap model) {
+	public String submitCredencials(@RequestParam(required = false) String name, @RequestParam String password,
+			ModelMap model) {
 
 		if (loginsSer.validate(password) == false) {
 			model.put("errorMessage", "Credenciales Invalidas");
@@ -40,18 +41,6 @@ public class LoginController {
 
 		}
 
-	}
-
-	@RequestMapping(value = "/clients", method = RequestMethod.POST)
-	public String showClientsPost(@RequestParam String name, @RequestParam String password, ModelMap model) {
-		model.put("name", name);
-		model.put("password", password);
-		return "clients";
-	}
-
-	@RequestMapping(value = "/clients", method = RequestMethod.GET)
-	public String showClientsGet() {
-		return "clients";
 	}
 
 }
