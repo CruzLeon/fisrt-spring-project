@@ -12,7 +12,8 @@
 
 <body>
  your todos are: <br>
- ${todos}    
+ ${todos}   <br>
+ the params in the first request are ${name} :: ${password}
 </body>
 
 </html>
