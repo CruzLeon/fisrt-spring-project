@@ -22,7 +22,6 @@ public class TodoController {
 	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
 	public String showListTodos(ModelMap model) {
 		String namefromLogin = (String) model.get("name");
-		System.out.println(namefromLogin);
 		model.put("todos", todoService.retrieveTodos(namefromLogin));
 		return "list-todos";
 	}
@@ -39,6 +38,5 @@ public class TodoController {
 		return "redirect:list-todos";
 	}
 	
-	//** TODO verificar si con un controlador existe la necesidad de utilizar sessionAttributes, para la logica, y par alas vistas
 	
 }
