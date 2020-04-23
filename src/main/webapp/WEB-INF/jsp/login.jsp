@@ -17,7 +17,9 @@
     <form action="" method="post">
         <label for="Pname">Nombre:</label>
         <input id="Pname" type="text" name="name">
-        <label for="Ppass">Pass:</label>
+        <label for="Pother">Other:</label>
+        <input id="Pother" type="text" name="other">
+        <label for="Ppass">Pass:</label>        
         <input id="Ppass" type="text" name="password">
         <input type="submit" value="Save">
     </form>
