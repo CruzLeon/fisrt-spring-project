@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-<meta charset='utf-8'>
-<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-<title>Clients</title>
-<meta name='viewport' content='width=device-width, initial-scale=1'>
-<link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-<script src='main.js'></script>
-</head>
-
-<body>
-	Bienvenido ${name}
-	<br>
-	<a href="/list-todos">Click here</a> to manage your todos
-
-</body>
-
-</html>
+<%@ include file="common/header.jspf"%>
+<%@ include file="common/navigation.jspf"%>
+<div class="container">
+	Bienvenido ${name} <br> 
+	<a href="/list-todos"
+		class="btn btn-success">Click here</a> to manage your todos
+</div>
+<%@ include file="common/footer.jspf"%>
