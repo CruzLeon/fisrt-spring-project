@@ -1,4 +1,4 @@
-package com.learnSpring.first.projectspring;
+package com.learnSpring.first.projectspring.springboot.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

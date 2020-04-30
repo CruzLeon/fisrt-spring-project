@@ -1,4 +1,4 @@
-package com.learnSpring.first.projectspring.controller;
+package com.learnSpring.first.projectspring.springboot.web.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,6 +7,8 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -23,6 +25,15 @@ import com.learnSpring.first.projectspring.springboot.web.service.TodoService;
 @Controller
 @SessionAttributes("name")
 public class TodoController {
+	
+	private String getLoggedUserName() {
+
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		return principal instanceof UserDetails ? ((UserDetails) principal).getUsername() : principal.toString();
+
+	}
+	
 
 	@Autowired
 	TodoService todoService;
@@ -36,10 +47,12 @@ public class TodoController {
 
 	@RequestMapping(value = "/list-todos", method = RequestMethod.GET)
 	public String showListTodos(ModelMap model) {
-		String namefromLogin = (String) model.get("name");
+		String namefromLogin = getLoggedUserName();
 		model.put("todos", todoService.retrieveTodos(namefromLogin));
 		return "list-todos";
 	}
+
+
 
 	@RequestMapping(value = "/add-todo", method = RequestMethod.GET)
 	public String showAddTodo(ModelMap model) {
@@ -47,7 +60,7 @@ public class TodoController {
 		// Crea un Objeto bean de defecto para que se enlace al formulario por medio del
 		// commandName, por lo cual los valores que se llenen aca se veran reflejados en
 		// los valores por defecto del formulario
-		model.addAttribute("todo", new Todo(0, (String) model.get("name"), "", new Date(), false));
+		model.addAttribute("todo", new Todo(0, getLoggedUserName(), "", new Date(), false));
 		//model.put("todo", new Todo(0, (String) model.get("name"), "Miremos si enlaza", new Date(), false));
 		
 		//la diferencia entre put and addAttribute es la validacion no NUll de addTributte
@@ -61,7 +74,7 @@ public class TodoController {
 			return "add-todos";
 		}
 		
-		String namefromLogin = (String) model.get("name");
+		String namefromLogin = getLoggedUserName();
 		todoService.addTodo(namefromLogin, todo.getDesc(), todo.getTargetDate(), false);
 		return "redirect:list-todos";
 	}
@@ -87,7 +100,7 @@ public class TodoController {
 		if(result.hasErrors()) {
 			return "add-todos";
 		}
-		todo.setUser((String)model.get("name"));
+		todo.setUser(getLoggedUserName());
 		todo.setTargetDate(new Date());
 		System.out.println(todo);
 		todoService.updateTodo(todo);
